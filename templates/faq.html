@@ -1,0 +1,337 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .faq-header {
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  .faq-content {
+    padding: 0 15px 10px;
+    display: none;
+  }
+</style>
+<div class="container mt-5">
+  <h2 class="mb-0">
+    General Advice and Resources on Spotting False Advertising
+  </h2>
+  <div id="collapseAdvice">
+    <div class="card-body">
+      <p>
+        Being able to spot false advertising is crucial to making informed
+        decisions as a consumer. Here are some tips and resources that can help:
+      </p>
+      <ul>
+        <li>
+          <strong>Check for Exaggerated Claims:</strong> Be wary of phrases like
+          "miracle cure" or "quick fix" that suggest unrealistic results.
+        </li>
+        <li>
+          <strong>Verify with Trusted Sources:</strong> Look up product claims
+          through reliable and independent sources such as government or
+          educational websites.
+        </li>
+        <li>
+          <strong>Understand the Fine Print:</strong> Always read the fine print
+          in advertisements to understand what is really being offered.
+        </li>
+        <li>
+          <strong>Be Skeptical of Limited Time Offers:</strong> Pressure to act
+          quickly can be a tactic to prevent you from researching the veracity
+          of a claim.
+        </li>
+      </ul>
+      <p>
+        For more detailed information and legal guidelines on advertising, you
+        can visit the following links:
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business"
+            target="_blank"
+            >FTC Guide for Small Businesses on Advertising</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-scams"
+            target="_blank"
+            >FTC Tips on How to Recognize and Avoid Phishing Scams</a
+          >
+        </li>
+        <li>
+          <a href="https://www.bbb.org/ad-truth/" target="_blank"
+            >Better Business Bureau's Ad Truth Campaign</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <h2 class="mb-3">Frequently Asked Questions</h2>
+  <div id="accordionExample">
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingOne">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+          >
+            What is False Advertisement App?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseOne"
+        class="collapse show"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          False Advertisement is a platform where users can report misleading
+          ads. Users can choose to log in or report anonymously to help promote
+          transparency and awareness about false advertising online.
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+          >
+            What are the benefits of registering and logging in?
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" data-bs-parent="#accordionExample">
+        <div class="card-body">
+          Registering and logging in allow you to save reports, revisit and
+          manage them easily, and participate in our community by voting on
+          reports. This helps identify the most pressing cases of false
+          advertising.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingThree">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+          >
+            How can I report anonymously?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseThree"
+        class="collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          You can choose not to log in and still submit reports. When reporting
+          anonymously, your identity is not disclosed to other users or
+          companies.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingFour">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour"
+          >
+            How do I search for reports?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseFour"
+        class="collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          Use the search bar on the homepage to filter reports by name or
+          category, making it easier to find specific cases of false
+          advertising.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingFive">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFive"
+          >
+            How are reports reviewed and managed?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseFive"
+        class="collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          Admins review each report, add comments, and may update the report
+          status. Users receive notifications about any actions taken on their
+          submitted reports.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingSix">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSix"
+          >
+            How can I identify false advertising?
+          </button>
+        </h2>
+      </div>
+      <div id="collapseSix" class="collapse" data-bs-parent="#accordionExample">
+        <div class="card-body">
+          Identifying false advertising involves checking for exaggerated
+          claims, misleading statements, or offers that seem too good to be
+          true. It is important to verify such information with credible sources
+          before accepting it as true.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingSeven">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSeven"
+          >
+            What happens after I submit a report?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseSeven"
+        class="collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          After submitting a report, it will be reviewed by our admin team for
+          validity and necessary action. You will receive notifications about
+          the status of your report and any comments or actions taken.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingEight">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEight"
+          >
+            How can I share a report?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseEight"
+        class="collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          Each report has a 'Share' button that allows you to easily share the
+          report on various social media platforms or via email, helping to
+          increase awareness and reach a larger audience. Once you click the
+          'Share' button, the link to the report will be copied to your
+          clipboard.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingNine">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseNine"
+          >
+            How do admins manage reports?
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseNine"
+        class="collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body">
+          Admins review reports for adherence to guidelines, verify their
+          content, and may engage with the reporting users. They play a crucial
+          role in maintaining the integrity and accuracy of reports on the
+          platform.
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header faq-header" id="headingTen">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTen"
+          >
+            What are the privacy policies regarding the information I share?
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTen" class="collapse" data-bs-parent="#accordionExample">
+        <div class="card-body">
+          We prioritize your privacy. Information shared during reporting can be
+          kept anonymous at your request. For registered users, personal
+          information is securely stored and not disclosed to third parties
+          without consent.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var acc = document.getElementsByClassName("faq-header");
+  for (var i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      var panel = this.nextElementSibling;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+  }
+</script>
+{% endblock %}

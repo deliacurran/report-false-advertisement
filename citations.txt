@@ -1,0 +1,8 @@
+Google login citations:
+https://web.archive.org/web/20210123204124/https://www.section.io/engineering-education/django-google-oauth/
+Bootstrap:
+https://getbootstrap.com/docs/5.3/components/navbar/
+AI Citation(Bing AI-Mixture of Copilot and ChatGPT):[Was used throughout the project for debugging and coding help]
+https://www.bing.com/chat?form=NTPCHB
+Share Button:
+https://icons.getbootstrap.com/icons/share/

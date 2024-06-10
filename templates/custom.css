@@ -1,0 +1,7 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+li a {
+  color: rgb(144, 27, 103);
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";

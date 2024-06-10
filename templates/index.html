@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    {% load socialaccount %}
+    <div class="alert alert-danger" role="alert">
+        DISCLAIMER: This is NOT a real app. Please DO NOT make any reports. This website is a project for CS 3240 at UVA.
+    </div>
+            {% if user.is_authenticated %}
+                {% if user.is_superuser and not user.is_staff %}
+
+                <h6><strong> Hello, {{user.username}} You are a site admin.</strong></h6>
+
+                {% else %}
+
+                <h6><strong>Hello, {{user.username}}.</strong></h6>
+
+                {% endif %}
+            {% else %}
+
+                <h6><strong>Hello Anonymous User, You are not logged in.</strong></h6>
+            {% endif %}
+<div style="display: flex; justify-content: space-between;">
+    <div style="text-align: left;">
+        Welcome to our False Advertisement Whistleblower Application. This platform is designed
+        for individuals who have experienced deceptive or misleading practices in advertising.
+        Our mission is to provide a safe and
+        secure environment where you can report such instances for public
+        awareness and prevention.
+        <br>
+<br>
+        In addition, this application serves as a resource for those who wish to stay informed about current misleading
+        advertisements and avoid potential scams. We have a collection of reports submitted by users. Please note
+        that certain private information in these reports has been redacted for privacy reasons.
+<br>
+<br>
+        You have the option to search for specific companies or categories. Furthermore, if you find a report
+        particularly helpful or noteworthy, you have the ability to ‘like’ or share it.
+        <br>
+<br>
+        Thank you for choosing our application as your trusted source for reporting and staying informed about
+        false
+        advertisements.
+        <br>
+    </div>
+    <img src="{% static 'images/Designer.png' %}" alt="Report False Ad" style="height: 320px; width: 330px;"
+         class = "rounded float-start">
+</div>
+<div class="container my-3">
+  <div class="row g-2">
+
+    <div class="col">
+      <form method="GET" action="{% url 'app:index' %}">
+        <div class="input-group">
+          <input type="text" name="company_name" value="{{ request.GET.company_name }}" placeholder="Search by company name..." class="form-control">
+          <button type="submit" class="btn btn-outline-secondary">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+    <form method="GET" action="{% url 'app:index' %}">
+        <div class="input-group">
+            <select name="category" class="form-control">
+                <option value="">Search by category...</option>
+                <option value="Food">Food</option>
+                <option value="Retail">Retail</option>
+                <option value="Jobs">Jobs</option>
+                <option value="Services">Services</option>
+                <option value="Medical">Medical</option>
+                <option value="Other">Other</option>
+            </select>
+            <button type="submit" class="btn btn-outline-secondary">Search</button>
+        </div>
+    </form>
+</div>
+  </div>
+
+ <div class="my-2">
+    <a href="{{ toggle_sort_url }}" class="btn btn-info {% if sort_by_likes %}active{% endif %}">
+        {% if sort_by_likes %}
+            Sort by Newest
+        {% else %}
+            Sort by Likes
+        {% endif %}
+    </a>
+</div>
+
+
+
+<div class="container-scrollable">
+  <h1 class="mb-3">Reports</h1>
+  <ul class="list-group">
+    {% for report in reports %}
+
+    <li class="list-group-item" id="report-{{ report.id }}">
+        <strong>Company Name:</strong> {{ report.company_name }}<br>
+        <strong>Reason:</strong> {{ report.reason }}<br>
+        <strong>Category:</strong> {{ report.category }}<br>
+        <strong>Report Date:</strong> {{ report.report_date }}<br>
+        <div class="mt-3 d-flex flex-row align-items-center justify-content-between">
+            <div>
+              <span>{{ report.likes_count }} Likes</span>
+            <form method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="report_id" value="{{ report.id }}">
+              {% if user.is_authenticated %}
+                  <form method="POST">
+                    {% csrf_token %}
+                    {% if report.user_liked %}
+                    <button type="submit" name="unlike" class="btn btn-secondary">Unlike</button>
+                    {% else %}
+                    <button type="submit" name="like" class="btn btn-primary">Like</button>
+                    {% endif %}
+                  </form>
+                {% else %}
+                    <p><i>Please log in to like this report.</i></p>
+                {% endif %}
+            </form>
+            </div>
+                <div style="text-align: right;">
+            <button onclick="copyToClipboard('{{ report.share_url }}')" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                    <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
+                </svg>
+            </button>
+        </div>
+    </li>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function copyToClipboard(text) {
+    var textarea = document.createElement("textarea");
+    textarea.textContent = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand("copy");
+        swal("Link copied!", " ", "success");
+    } catch (ex) {
+        console.warn("Copy to clipboard failed.", ex);
+        return false;
+    } finally {
+        document.body.removeChild(textarea);
+    }
+}
+</script>
+    <script>
+window.onload = function() {
+    var fragment = window.location.hash;
+    if (fragment.startsWith('#report-')) {
+        var reportElement = document.querySelector(fragment);
+
+        if (reportElement) {
+            reportElement.classList.add('highlight');
+        }
+    }
+};
+</script>
+<style>
+.highlight {
+    background-color: yellow;
+}
+.list-group-item {
+    word-wrap: break-word;
+}
+</style>
+{% endblock %}

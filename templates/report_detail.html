@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h2>Report Details</h2>
+
+  <div class="my-3">
+      <p><strong>Likes:</strong> {{ report.likes_count }}</p>
+
+      {% if user.is_authenticated %}
+      <form method="POST">
+          {% csrf_token %}
+          {% if user_liked %}
+          <button type="submit" name="unlike" class="btn btn-secondary">Unlike</button>
+          {% else %}
+          <button type="submit" name="like" class="btn btn-primary">Like</button>
+          {% endif %}
+      </form>
+      {% else %}
+      <p>Please log in to like this report.</p>
+      {% endif %}
+  </div>
+
+  <span class="badge {% if report.status == 'Review-Pending' %} bg-warning {% elif report.status == 'Review-In-Progress' %} bg-info {% else %} bg-success {% endif %} float-end">
+    {{ report.status }}
+  </span>
+  <p><strong>Reported by:</strong> {{ reporter_name }}</p>
+  <p><strong>Reporter's email:</strong> {{ report.reporter_email }}</p>
+  <p><strong>Company/Business Being Reported:</strong> {{ report.company_name }}</p>
+  <p><strong>Reason:</strong> {{ report.reason }}</p>
+  <p><strong>Category:</strong> {{ report.category }}</p>
+  <p><strong>Report Date:</strong> {{ report.report_date }}</p>
+  <h3>Files</h3>
+  <ul class="list-group my-3">
+    {% for s3_key, presigned_url, file_type in presigned_urls %}
+    <li class="list-group-item">
+        <p><strong>File Name:</strong> {{ s3_key }}</p>
+    {% if file_type == 'jpeg' %}
+        <img src="{{ presigned_url }}" style="max-width: 100%; height: auto;">
+      {% elif file_type == 'jpg' %}
+        <img src="{{ presigned_url }}" style="max-width: 100%; height: auto;">
+      {% elif file_type == 'txt' %}
+        <embed class="txt" src= "{{ presigned_url }}" width="100%" height="1000px">
+      {% elif file_type == 'pdf' %}
+        <embed class="pdf" src= "{{ presigned_url }}" width="100%" height="1000px">
+      {% else %}
+        <a href="{{ presigned_url }}" target="_blank">{{ s3_key }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% if user.is_superuser  and not user.is_staff %}
+    {% if report.status == 'Review-In-Progress' %}
+      <form action="{% url 'app:mark_review_completed' report.id %}" method="POST">
+        {% csrf_token %}
+        <p><strong>Admin Notes:</strong></p>
+        <textarea class="form-control" name="message" id="message" placeholder="Resulting action..."></textarea>
+        <br></br> 
+        <button type="submit" class="btn btn-info mx-auto d-block">Submit Report Review</button>
+      </form>
+    {% endif %}
+  {% endif %}
+  {% if report.status == "Review-Completed" %}
+    <p class="admin-notes"><strong>Admin Notes:</strong> {{ report.admin_notes}}</p>
+  {% endif %}
+
+</div>
+<style>p {
+    word-wrap: break-word;
+}
+.admin-notes {
+    word-wrap: break-word;
+    background-color: #62aef0;
+}
+</style>
+
+{% endblock %}

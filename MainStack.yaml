@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS Cloudformation Template
+
+# aws configure --profile cs3240
+# enter the access key
+# enter the secret key
+# enter the region: us-east-1
+
+# This command is used to deploy the resources to AWS
+# aws cloudformation create-stack --stack-name MainStack --template-body file://MainStack.yaml --profile cs3240
+
+Resources:
+  UserUploads:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: project-b-03-user-uploads
